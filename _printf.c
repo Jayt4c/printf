@@ -1,52 +1,54 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <stddef.h>
 #include "main.h"
+#include <stdarg.h>
+#include <unistd.h>
 
 /**
- * _printf - prints formatted output to stdout
- * @format: format string containing format specifiers
- *
- * Return: number of characters printed
+ * _printf - printf function
+ * @format: Format string
+ * @...: More arguments
+ * Return: Number of characters printed
  */
 int _printf(const char *format, ...)
 {
-	if (format == NULL)
-		return (-1);
+    int count = 0;
+    va_list args;
 
-	va_list args;
-	va_start(args, format);
+    va_start(args, format);
 
-	int count = 0;
-	for (int i = 0; format[i] != '\0'; i++)
-	{
-		if (format[i] == '%')
-		{
-			if (format[i + 1] == '%')
-			{
-				count += putchar('%');
-				i++;
-			}
-			else
-			{
-				int (*m)(va_list) = get_func(format[i + 1]);
-				if (m)
-					count += m(args);
-				else
-				{
-					count += putchar('%');
-					count += putchar(format[i + 1]);
-				}
-				i++;
-			}
-		}
-		else
-		{
-			count += putchar(format[i]);
-		}
-	}
+    while (*format)
+    {
+        if (*format == '%')
+        {
+            format++;
+            switch (*format)
+            {
+            case 'c':
+		    {
+			    int value = va_arg(args, int);
+			    count += write(1, &value, 1);
+		    }
+                break;
+            case 's':
+                count += write(1, va_arg(args, char *), 1);
+                break;
+            case '%':
+                count += write(1, "%", 1);
+                break;
+            default:
+                count += write(1, "%", 1);
+                count += write(1, format, 1);
+                break;
+            }
+        }
+        else
+        {
+            count += write(1, format, 1);
+        }
+        format++;
+    }
 
-	va_end(args);
-	return (count);
+    va_end(args);
+
+    return count;
 }
+
