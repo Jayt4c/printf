@@ -41,6 +41,26 @@ int _printf(const char *format, ...)
 				case 'i':
 					count += print_int(va_arg(args, int));
 					break;
+				case 'u':
+					{
+						count += print_unsigned(args);
+					}
+					break;
+				case 'o':
+					{
+						count += print_octal(args);
+					}
+					break;
+				case 'x':
+					{
+						count += print_hexa(args, 0);
+					}
+					break;
+				case 'X':
+					{
+						count += print_hexa(args, 1);
+					}
+					break;
 				default:
 					count += write(1, "%", 1);
 					count += write(1, format, 1);
