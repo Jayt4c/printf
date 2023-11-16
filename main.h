@@ -5,8 +5,8 @@
 
 typedef struct format
 {
-    char *ph;
-    int (*fp)();
+	char *ph;
+	int (*fp)();
 } Hind;
 
 int _putchar(char c);
