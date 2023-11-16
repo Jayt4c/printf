@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
@@ -10,8 +11,8 @@
  */
 int _printf(const char *format, ...)
 {
-    int count = 0;
     va_list args;
+    int count = 0;
 
     va_start(args, format);
 
