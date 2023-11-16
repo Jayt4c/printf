@@ -1,7 +1,12 @@
+#include <string.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+char *uint_to_str(unsigned int value);
+char *uint_to_octal_str(unsigned int value);
+char *uint_to_hex_str(unsigned int value, int uppercase);
 
 /* Function to print unsigned integer*/
 int print_unsigned(va_list args) {

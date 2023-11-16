@@ -28,7 +28,6 @@ int printi(va_list arg);
 int printb(va_list val);
 int print_unsigned(va_list arg);
 int print_octa(va_list val);
-int print_hexa(va_list val);
 int print_HEXA(va_list val);
 int print_HEX_more(unsigned int q);
 int print_pointer(va_list val);
@@ -37,4 +36,3 @@ int print_rot13(va_list val);
 int print_hex_more(unsigned long int i);
 
 #endif
-
